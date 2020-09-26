@@ -2,6 +2,20 @@ Commands i've used:
     For Node:               npm init
     for express & Mongo:    npm install express monogodb
     For nodemon:            npm install --save-dev nodemon
+    For CORS & Body-parser: npm install --save cors body-parser
 
-**MongoDB Claster Project Created....
-      
+**Set Script in Packege.Json
+                    "start": "nodemon index.js"
+
+**Cloud.mongoDB.com Operatons
+    DB Name:                     
+    DB UserName:            practice-mongo  
+    DB Password:            rWrChfTQDtH7rG8
+
+    @ Network Access: Dynamic For Practice Perpus
+    @ Connect: Set Username & Password
+    @ Connection Method: Connect to your Application
+    @ Include Full Driver Code
+    @ Set URI: Set Password & DB Name
+
+
