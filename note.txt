@@ -1,0 +1,7 @@
+Commands i've used:
+    For Node:               npm init
+    for express & Mongo:    npm install express monogodb
+    For nodemon:            npm install --save-dev nodemon
+
+**MongoDB Claster Project Created....
+      
