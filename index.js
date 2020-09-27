@@ -1,5 +1,5 @@
-const { response } = require('express');
 const express = require('express')
+const bodyParser= require('body-parser')
 const app = express()
 
 const MongoClient = require('mongodb').MongoClient;
@@ -8,21 +8,25 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 
 app.get('/',(req,res)=>{
-    res.send("Node Js And MongoDB Programme is Running...")
+    res.sendFile(__dirname +'/frontend.html')
 })
 
 
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
 
 
-client.connect(err => {
-  const collection = client.db("practice-mongo").collection("crud")
-  
-         collection.insertOne({name:"sania Akter", age:20, institute:"iubat"})
+  client.connect(err => {
+    const collection = client.db("practice-mongo").collection("crud")
+         
+    app.post("/insertData",(req,res)=>{
+      collection.insertOne(req.body)
         .then(result => {
-          console.log("Single User Inserted Successful")
+          res.send("Data Successfully Submitted")
         })
+    })
 
-});
+  });
 
 app.listen(3000)
 

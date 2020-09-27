@@ -21,4 +21,40 @@ Commands i've used:
     @ Set DB Name & Collection Name.
     @ Use useUnifiedTopology: true { new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });}
 
+** Application Sent To another Directory....
+
+        app.get('/',(req,res)=>{
+            res.sendFile(__dirname +'/frontend.html')
+        })
+
+
+** Manually Pass Single Data in MongoDB Database.....
+
+        client.connect(err => {
+          const collection = client.db("practice-mongo").collection("crud")
+                collection.insertOne({name:"sania Akter", age:20, institute:"iubat"})
+                .then(result => {
+                  console.log("Single User Inserted Successful")
+                })
+        });
+
+** Dynamically Pass Form Data into Database......
+    @Create a form using two attribute: action & Form
+    @Emport Body-parser in your Application
+    @Specially use {
+                        app.use(bodyParser.urlecnoded({extanded:false}))
+                        app.use(bodyParser.Json())
+        } to get From Json Data By Body-parser...
+    
+    Operation: 
+                    app.post("/insertData",(req,res)=>{
+                    collection.insertOne(req.body)
+                        .then(result => {
+                        res.send("Data Successfully Submitted")
+                        })
+                    })
+
+
+
+
 
