@@ -8,7 +8,7 @@ Commands i've used:
                     "start": "nodemon index.js"
 
 **Cloud.mongoDB.com Operatons
-    DB Name:                     
+    DB Name:                practice-mongo   
     DB UserName:            practice-mongo  
     DB Password:            rWrChfTQDtH7rG8
 
@@ -17,5 +17,8 @@ Commands i've used:
     @ Connection Method: Connect to your Application
     @ Include Full Driver Code
     @ Set URI: Set Password & DB Name
+    @ Cluster > Cullection > Add My own Data > Setup DB Name
+    @ Set DB Name & Collection Name.
+    @ Use useUnifiedTopology: true { new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });}
 
 
