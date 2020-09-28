@@ -24,7 +24,7 @@ app.get('/',(req,res)=>{
     app.post("/insertData",(req,res)=>{
       collection.insertOne(req.body)
         .then(result => {
-          res.sendFile(__dirname +'/frontend.html')
+          res.redirect('/')
         })
     })
 
@@ -37,11 +37,35 @@ app.get('/',(req,res)=>{
         })
     })
 
+  //Load Single User For Update....
+      app.get("/load/:id",(req,res)=>{
+        collection.find({_id:ObjectId(req.params.id)})
+        .toArray((err, document)=>{
+          res.send(document[0])
+        })
+      })
+
   //Delete Data from MongoDB....
       app.delete("/delete/:id",(req,res)=>{
           collection.deleteOne({_id:ObjectId(req.params.id)})
           .then(result=>{
-                res.sendFile(__dirname +'/frontend.html')
+                res.redirect('/')
+          })
+      })
+
+  //Update Data in MongoDB......
+      app.patch("/update/:id",(req,res)=>{
+        collection.updateOne({_id:ObjectId(req.params.id)},
+          {
+            $set:{
+              name:req.body.name,
+              email:req.body.email,
+              phone:req.body.phone,
+              address:req.body.address
+            }
+          })
+          .then(result=>{
+            res.redirect('/')
           })
       })
 

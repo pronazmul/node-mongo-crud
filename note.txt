@@ -102,12 +102,33 @@ Commands i've used:
                 })
 
     @Delete Data From UI
-        
+
         const deleteUser = id => {
             fetch(`/delete/${id}`,{method:'DELETE'})
             .then(res=> window.location.href = '/')
             // .then(data => console.log("Delete Success"))
         }
+
+    @ Load Single Data For Update From UI...
+
+           const loadUser = id => {
+            fetch(`/load/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                })
+           }
+
+    @ Mannage single data For UPdate From Backend...
+
+        app.get("/load/:id",(req,res)=>{
+            collection.find({_id:ObjectId(req.params.id)})
+            .toArray((err, document)=>{
+            res.send(document[0])
+            })
+        })
+
+    
+
 
 
 

@@ -11,58 +11,118 @@
 <body>
 
     <div class="jumbotron text-center py-3">
-        <h1 class="font-width-bold">Mongo Db Connectd Frontend</h1>
+        <h1 class="font-width-bold">Node JS MongoDB CRUD</h1>
     </div>
 
-    <div class="row col-md-8 mx-auto">
-        <form action="/insertData" method="POST" class="w-100">
-            <div class="form-group">
-                <label>Enter Username</label>
-                <input type="text" name="userName" class="form-control" placeholder="User name">
-            </div>
-            <div class="form-group">
-                <label>Enter Email</label>
-                <input type="email" name="userEmail" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label>Enter Phone</label>
-                <input type="number" name="userPhone" class="form-control" placeholder="Phone">
-            </div>
-            <div class="form-group">
-                <label>Enter Address</label>
-                <input type="text" name="userAddress" class="form-control" placeholder="Email">
-            </div>
-            <input type="submit" class="btn btn-success" value="Submit Data"/>
-        </form>
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <div id="text"></div>
+    <div class="row container">
+        <div class="col-md-6">
+            <h1 class="jumbotron py-2 text-cenetr">Add User</h1>
+            <form action="/insertData" method="POST" class="w-100">
+                <div class="form-group">
+                    <label>Enter Username</label>
+                    <input type="text" name="name" class="form-control" placeholder="User name">
+                </div>
+                <div class="form-group">
+                    <label>Enter Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Enter Phone</label>
+                    <input type="number" name="phone" class="form-control" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                    <label>Enter Address</label>
+                    <input type="text" name="address" class="form-control" placeholder="Address">
+                </div>
+                <input type="submit" class="btn btn-success" value="Submit Data" />
+            </form>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="text"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div id="loadedData" class="col-md-6">
+
+        </div>
+
     </div>
-<script>
-    
-    const deleteUser = id => {
-        fetch(`/delete/${id}`,{method:'DELETE'})
-        .then(res=> window.location.href = '/')
-        // .then(data => console.log("Delete Success"))
-    }
+    <script>
 
-        fetch('/read')
-        .then(res=> res.json())
-        .then(data=>{
-            data.forEach(user => {
-                const item = document.createElement('p')
-                item.innerHTML =`<strong>Name:</strong> ${user.userName} 
-                                <strong>Email:</strong> ${user.userEmail} 
+        const deleteUser = id => {
+            fetch(`/delete/${id}`, { method: 'DELETE' })
+                .then(res => window.location.href = '/')
+            // .then(data => console.log("Delete Success"))
+        }
+
+        const loadUser = id => {
+            fetch(`/load/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    const item = document.getElementById('loadedData')
+                    item.innerHTML = `
+                                        <h1 class="jumbotron py-2 text-cenetr">Update User</h1>
+                                        <div class="form-group">
+                                            <label>Enter Username</label>
+                                            <input type="text" name="name" id ="name" class="form-control" value="${data.name}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Enter Email</label>
+                                            <input type="email" name="email" id="email" class="form-control" value="${data.email}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Enter Phone</label>
+                                            <input type="number" name="phone" id="phone" class="form-control" value="${data.phone}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Enter Address</label>
+                                            <input type="text" name="address" id="address" class="form-control" value="${data.address}">
+                                        </div>
+                                        <input type="submit" class="btn btn-success" onclick="update('${data._id}')" value="Update Data"/>                
+                                        `
+                })
+            // .then(res=> window.location.href = '/')
+        }
+
+        const update = id =>{
+           const name = document.getElementById('name').value
+           const email = document.getElementById('email').value
+           const phone = document.getElementById('phone').value
+           const address = document.getElementById('address').value
+           const user = {id, name, email, phone, address}
+           
+           fetch(`/update/${id}`,{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(user)
+           })
+           .then(res=> {
+            read()
+            window.location.href = '/'
+           })
+        //    .then(data => console.log(data))
+        }
+
+        const read = ()=>{
+            fetch('/read')
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(user => {
+                    const item = document.createElement('p')
+                    item.innerHTML = `<strong>Name:</strong> ${user.name} 
+                                <strong>Email:</strong> ${user.email} 
+                                <button onclick='loadUser("${user._id}")'class='btn btn-success'>Update</button>
                                 <button onclick='deleteUser("${user._id}")'class='btn btn-danger'>Delete</button>`
-                document.getElementById('text').appendChild(item)
+                    document.getElementById('text').appendChild(item)
+                })
             })
-        })
+        }
 
-</script>
+        read()
+
+    </script>
 
 </body>
 
