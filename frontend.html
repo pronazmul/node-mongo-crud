@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center py-3">
         <h1 class="font-width-bold">Mongo Db Connectd Frontend</h1>
     </div>
 
@@ -46,8 +46,8 @@
     
     const deleteUser = id => {
         fetch(`/delete/${id}`,{method:'DELETE'})
-        .then(res=> res.json())
-        .then(data => console.log("Delete Success"))
+        .then(res=> window.location.href = '/')
+        // .then(data => console.log("Delete Success"))
     }
 
         fetch('/read')

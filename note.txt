@@ -89,7 +89,7 @@ Commands i've used:
         })
     
     @Manage Data Delete From ServerSide ......
-    
+
         & import Object ID First...
             const ObjectId = require('mongodb').ObjectId
         
@@ -102,11 +102,11 @@ Commands i've used:
                 })
 
     @Delete Data From UI
-
+        
         const deleteUser = id => {
-        fetch(`/delete/${id}`,{method:'DELETE'})
-        .then(res=> res.json())
-        .then(data => console.log("Delete Successs"))
+            fetch(`/delete/${id}`,{method:'DELETE'})
+            .then(res=> window.location.href = '/')
+            // .then(data => console.log("Delete Success"))
         }
 
 

@@ -38,12 +38,12 @@ app.get('/',(req,res)=>{
     })
 
   //Delete Data from MongoDB....
-    app.delete("/delete/:id",(req,res)=>{
-        collection.deleteOne({_id:ObjectId(req.params.id)})
-        .then(result=>{
-              res.sendFile(__dirname +'/frontend.html')
-        })
-    })
+      app.delete("/delete/:id",(req,res)=>{
+          collection.deleteOne({_id:ObjectId(req.params.id)})
+          .then(result=>{
+                res.sendFile(__dirname +'/frontend.html')
+          })
+      })
 
 });
 
