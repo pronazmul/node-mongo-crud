@@ -6,6 +6,11 @@ Commands i've used:
 
 **Set Script in Packege.Json
                     "start": "nodemon index.js"
+** Initialize Application: 
+   	const express = require('express')
+	const app = express()
+
+    @app.listen(3000, ()=> console.log('Programme Is Listening'))
 
 **Cloud.mongoDB.com Operatons
     DB Name:                practice-mongo   
@@ -28,7 +33,11 @@ Commands i've used:
         })
 
 
-** Manually Pass Single Data in MongoDB Database.....
+** Mongo Setup & Pass Single Data to MongoDB.....
+	
+	const MongoClient = require('mongodb').MongoClient;
+	const uri = "mongodb+srv://practice-mongo:rWrChfTQDtH7rG8@cluster0.mx72a.mongodb.net/practice-mongo?retryWrites=true&w=majority";
+	const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
         client.connect(err => {
           const collection = client.db("practice-mongo").collection("crud")
@@ -53,8 +62,5 @@ Commands i've used:
                         res.send("Data Successfully Submitted")
                         })
                     })
-
-
-
 
 

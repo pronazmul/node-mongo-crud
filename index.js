@@ -18,7 +18,16 @@ app.get('/',(req,res)=>{
 
   client.connect(err => {
     const collection = client.db("practice-mongo").collection("crud")
-         
+
+  //Read Data From MongoDB......
+  app.get("/read",(req,res)=>{
+      collection.find({})
+      .toArray((err,document)=>{
+        res.send(document)
+      })
+  })
+
+   //Insert Data in MongoDB....    
     app.post("/insertData",(req,res)=>{
       collection.insertOne(req.body)
         .then(result => {

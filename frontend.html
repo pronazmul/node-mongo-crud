@@ -30,12 +30,35 @@
             </div>
             <div class="form-group">
                 <label>Enter Address</label>
-                <input type="text" name="userAddress" class="form-control" placeholder="Address">
+                <input type="text" name="userAddress" class="form-control" placeholder="Email">
             </div>
             <input type="submit" class="btn btn-success" value="Submit Data"/>
         </form>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div id="text"></div>
+                </div>
+            </div>
+        </div>
     </div>
+<script>
+    
+    const deleteUser = id =>console.log(id)
 
+        fetch('/read')
+        .then(res=> res.json())
+        .then(data=>{
+            data.forEach(user => {
+                const item = document.createElement('p')
+                item.innerHTML =`<strong>Name:</strong> ${user.userName} 
+                                <strong>Email:</strong> ${user.userEmail} 
+                                <button onclick='deleteUser("${user._id}")'class='btn btn-danger'>Delete</button>`
+                document.getElementById('text').appendChild(item)
+            })
+        })
+
+</script>
 
 </body>
 
