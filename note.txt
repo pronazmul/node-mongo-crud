@@ -64,3 +64,34 @@ Commands i've used:
                     })
 
 
+** Read Data From MongoDB Database.........
+
+        app.get("/read",(req,res)=>{
+            collection.find({})
+            .toArray((err,document)=>{
+                res.send(document)
+            })
+        })
+ @ Read Data Using Limit..........
+        app.get("/read",(req,res)=>{
+            collection.find({}).limit(2)
+            .toArray((err,document)=>{
+                res.send(document)
+            })
+        })
+        
+@ Load Data From Ui .............
+
+        fetch('/read')
+        .then(res=> res.json())
+        .then(data=>{
+            data.forEach(user => {
+                const item = document.createElement('p')
+                item.innerHTML = user.userName
+                document.getElementById('text').appendChild(item)
+            });
+        })
+
+
+
+
