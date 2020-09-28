@@ -127,6 +127,45 @@ Commands i've used:
             })
         })
 
+
+    @ Update Data Request From frontend.....
+
+           const update = id =>{
+           const name = document.getElementById('name').value
+           const email = document.getElementById('email').value
+           const phone = document.getElementById('phone').value
+           const address = document.getElementById('address').value
+           const user = {id, name, email, phone, address}
+           
+           fetch(`/update/${id}`,{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(user)
+           })
+           .then(res=> {
+            read()
+            window.location.href = '/'
+           })
+
+    @ Manage Update User From Backend........
+
+        app.patch("/update/:id",(req,res)=>{
+        collection.updateOne({_id:ObjectId(req.params.id)},
+          {
+            $set:{
+              name:req.body.name,
+              email:req.body.email,
+              phone:req.body.phone,
+              address:req.body.address
+            }
+          })
+          .then(result=>{
+            res.redirect('/')
+          })
+      })
+
+      @ Specifically Get value: event.target.parentNode.style.display='none'
+
     
 
 
