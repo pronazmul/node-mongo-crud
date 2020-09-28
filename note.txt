@@ -165,8 +165,7 @@ Commands i've used:
       })
 
       @ Specifically Get value: event.target.parentNode.style.display='none'
-
-    
+   
 
 
 
