@@ -64,33 +64,52 @@ Commands i've used:
                     })
 
 
-** Read Data From MongoDB Database.........
+** Manage Data Read From Serverside.........
 
-        app.get("/read",(req,res)=>{
-            collection.find({})
-            .toArray((err,document)=>{
-                res.send(document)
-            })
-        })
- @ Read Data Using Limit..........
         app.get("/read",(req,res)=>{
             collection.find({}).limit(2)
             .toArray((err,document)=>{
                 res.send(document)
             })
         })
+
         
-@ Load Data From Ui .............
+@ Load Data From UI .............
 
         fetch('/read')
         .then(res=> res.json())
         .then(data=>{
             data.forEach(user => {
                 const item = document.createElement('p')
-                item.innerHTML = user.userName
+                item.innerHTML =`<strong>Name:</strong> ${user.userName} 
+                                <strong>Email:</strong> ${user.userEmail} 
+                                <button onclick='deleteUser("${user._id}")'class='btn btn-danger'>Delete</button>`
                 document.getElementById('text').appendChild(item)
-            });
+            })
         })
+    
+    @Manage Data Delete From ServerSide ......
+    
+        & import Object ID First...
+            const ObjectId = require('mongodb').ObjectId
+        
+        Operation:
+                app.delete("/delete/:id",(req,res)=>{
+                    collection.deleteOne({_id:ObjectId(req.params.id)})
+                    .then(result=>{
+                          res.sendFile(__dirname +'/frontend.html')
+                    })
+                })
+
+    @Delete Data From UI
+
+        const deleteUser = id => {
+        fetch(`/delete/${id}`,{method:'DELETE'})
+        .then(res=> res.json())
+        .then(data => console.log("Delete Successs"))
+        }
+
+
 
 
 
