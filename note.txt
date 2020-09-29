@@ -1,4 +1,4 @@
-Commands i've used:
+Commands to install Node, Mongo, Nodemon, CORS, Body-Parser:
     For Node:               npm init
     for express & Mongo:    npm install express monogodb
     For nodemon:            npm install --save-dev nodemon
