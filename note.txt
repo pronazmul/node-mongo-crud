@@ -32,7 +32,6 @@ Commands to install Node, Mongo, Nodemon, CORS, Body-Parser:
             res.sendFile(__dirname +'/frontend.html')
         })
 
-
 ** Mongo Setup & Pass Single Data to MongoDB.....
 	
 	const MongoClient = require('mongodb').MongoClient;
